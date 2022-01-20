@@ -1,1 +1,13 @@
 ﻿
+
+<button id="submit-route-search" type="button">Submit</button>
+
+<div id="results-div">
+  @await Html.PartialAsync("_ResultsPartial")
+</div>
+
+<script>
+  $("#submit-route-search").on("click", () => {
+    $("#results-div").load("~/GetRoutes", {Origin: , Destination: })
+  });
+</script>

@@ -12,5 +12,13 @@ namespace TrainsClient.Models
       RestResponse response = await client.ExecuteGetAsync(request);
       return response.Content;
     }
+
+    public static async Task<string> GetStations()
+    {
+      RestClient client = new RestClient("http://localhost:5000/api");
+      RestRequest request = new RestRequest($"stations", Method.Get);
+      RestResponse response = await client.ExecuteGetAsync(request);
+      return response.Content;
+    }
   }
 }
