@@ -20,9 +20,9 @@ namespace TrainsClient.Controllers
     }
 
     [HttpPost]
-    public PartialViewResult GetRoutes(int Origin, int Destination)
+    public PartialViewResult GetRoutes(int Origin, int Destination, string SortMethod)
     {
-      List<Route> model = Route.GetRoutes(Origin, Destination);
+      List<Route> model = Route.GetRoutes(Origin, Destination, SortMethod);
       return PartialView("_ResultsPartial", model);
     }
 
@@ -30,8 +30,7 @@ namespace TrainsClient.Controllers
     {
       var apiCallTask = ApiHelper.GetStations();
       string result = apiCallTask.Result;
-      JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
-      return JsonConvert.DeserializeObject<List<Object>>(jsonResponse.ToString());
+      return JsonConvert.DeserializeObject<List<Object>>(result);
     }
   }
 }

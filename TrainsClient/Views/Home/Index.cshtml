@@ -13,6 +13,10 @@
     <option value=@station.stationId>@station.name</option>
   }
 </select>
+<label for="sortmethod-time">Sort by time: </label>
+<input type="radio" id="sortmethod-time" name="sort-radio" value="time" checked>
+<label for="sortmethod-fare">Sort by fare: </label>
+<input type="radio" id="sortmethod-fare" name="sort-radio" value="fare">
 <button id="submit-route-search" type="button">Find Routes</button>
 
 <div id="results-div">
@@ -23,6 +27,7 @@
   $("#submit-route-search").on("click", () => {
     let origin = $("#origin-select option:selected").val();
     let destination = $("#destination-select option:selected").val();
-    $("#results-div").load("/Home/GetRoutes", {Origin: origin, Destination: destination});
+    let sortMethod = $("input[name='sort-radio']:checked").val();
+    $("#results-div").load("/Home/GetRoutes", {Origin: origin, Destination: destination, SortMethod: sortMethod});
   });
 </script>

@@ -11,15 +11,14 @@ namespace TrainsClient.Models
     public double TotalFare {get; set;}
     
     //async?
-    public static List<Route> GetRoutes(int origin, int destination)
+    public static List<Route> GetRoutes(int origin, int destination, string sortMethod = "time")
     {   
-      var apiCallTask = ApiHelper.GetRoutes(origin, destination);
+      var apiCallTask = ApiHelper.GetRoutes(origin, destination, sortMethod);
       var result = apiCallTask.Result;
 
-      //why convert to JArray and then back to String?
-      JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
-      List<Route> routes = JsonConvert.DeserializeObject<List<Route>>(jsonResponse.ToString());
+      List<Route> routes = JsonConvert.DeserializeObject<List<Route>>(result);
       
+      JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
       int listIndex = 0;
       foreach (JToken token in jsonResponse)
       {
