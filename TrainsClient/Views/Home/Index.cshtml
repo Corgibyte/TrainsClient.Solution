@@ -1,6 +1,19 @@
-﻿
-
-<button id="submit-route-search" type="button">Submit</button>
+﻿<h2>Find Routes:</h2>
+<label for="origin-select">From:</label>
+<select id="origin-select">
+  @foreach (var station in ViewBag.StationsList)
+  {
+    <option value=@station.stationId>@station.name</option>
+  }
+</select>
+<label for="destination-select">To:</label>
+<select id="destination-select">
+  @foreach (var station in ViewBag.StationsList)
+  {
+    <option value=@station.stationId>@station.name</option>
+  }
+</select>
+<button id="submit-route-search" type="button">Find Routes</button>
 
 <div id="results-div">
   @await Html.PartialAsync("_ResultsPartial")
@@ -8,6 +21,8 @@
 
 <script>
   $("#submit-route-search").on("click", () => {
-    $("#results-div").load("~/GetRoutes", {Origin: , Destination: })
+    let origin = $("#origin-select option:selected").val();
+    let destination = $("#destination-select option:selected").val();
+    $("#results-div").load("/GetRoutes", {Origin: origin, Destination: destination});
   });
 </script>

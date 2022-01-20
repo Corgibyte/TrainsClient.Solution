@@ -9,11 +9,14 @@ namespace TrainsClient.Models
     public List<string> StationNames {get; set;}
     public int TotalTravelTime {get; set;}
     public double TotalFare {get; set;}
+    
+    //async?
     public static List<Route> GetRoutes(int origin, int destination)
     {   
       var apiCallTask = ApiHelper.GetRoutes(origin, destination);
       var result = apiCallTask.Result;
 
+      //why convert to JArray and then back to String?
       JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
       List<Route> routes = JsonConvert.DeserializeObject<List<Route>>(jsonResponse.ToString());
       

@@ -1,4 +1,21 @@
-@* @if (there is a thing)
+@using TrainsClient.Models;
+@model List<Route>;
+
+@if (Model != null && Model.Count > 0)
 {
-  show the things
-} *@
+  foreach (Route route in Model)
+  {
+    string stationsString = "";
+    foreach (string station in route.StationNames)
+    {
+      stationsString += $"{station} -> ";
+    }
+    stationsString = stationsString.Remove(stationsString.Length - 3, 3);
+
+    <hr />
+    <h4>Route: @stationsString</h4>
+    <p>Travel Time: @route.TotalTravelTime</p>
+    <p>Fare: @route.TotalFare</p>
+    <hr />
+  }
+}
