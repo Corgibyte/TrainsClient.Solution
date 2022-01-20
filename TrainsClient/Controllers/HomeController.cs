@@ -22,7 +22,6 @@ namespace TrainsClient.Controllers
     [HttpPost]
     public PartialViewResult GetRoutes(int Origin, int Destination)
     {
-      Console.WriteLine("you are in the route!");
       List<Route> model = Route.GetRoutes(Origin, Destination);
       return PartialView("_ResultsPartial", model);
     }

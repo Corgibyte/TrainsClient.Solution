@@ -23,6 +23,6 @@
   $("#submit-route-search").on("click", () => {
     let origin = $("#origin-select option:selected").val();
     let destination = $("#destination-select option:selected").val();
-    $("#results-div").load("/GetRoutes", {Origin: origin, Destination: destination});
+    $("#results-div").load("/Home/GetRoutes", {Origin: origin, Destination: destination});
   });
 </script>
